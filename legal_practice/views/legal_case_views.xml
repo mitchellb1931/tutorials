@@ -1,0 +1,65 @@
+<odoo>
+    <record id="view_legal_case_list" model="ir.ui.view">
+        <field name="name">legal.case.list</field>
+        <field name="model">legal.case</field>
+        <field name="arch" type="xml">
+            <list string="Expedientes" decoration-danger="priority=='2'" decoration-warning="priority=='1'">
+                <field name="display_name"/>
+                <field name="client_id"/>
+                <field name="case_type_id"/>
+                <field name="court_id"/>
+                <field name="lawyer_id"/>
+                <field name="opening_date"/>
+                <field name="state" widget="badge"/>
+                <field name="priority" widget="priority"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_legal_case_form" model="ir.ui.view">
+        <field name="name">legal.case.form</field>
+        <field name="model">legal.case</field>
+        <field name="arch" type="xml">
+            <form string="Expediente">
+                <header>
+                    <button name="action_set_en_proceso" string="Iniciar Proceso" type="object"
+                            invisible="state != 'nuevo'" class="btn-primary"/>
+                    <button name="action_set_en_espera" string="Poner en Espera" type="object"
+                            invisible="state != 'en_proceso'"/>
+                    <button name="action_close_case" string="Cerrar Expediente" type="object"
+                            invisible="state in ('cerrado', 'archivado')"/>
+                    <button name="action_archive_case" string="Archivar" type="object"
+                            invisible="state != 'cerrado'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="nuevo,en_proceso,en_espera,cerrado"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="display_name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Identificación del Expediente">
+                            <field name="case_type_id" readonly="id" options="{'no_create': True}"/>
+                            <field name="case_number" readonly="id"/>
+                            <field name="case_year" readonly="id"/>
+                            <field name="court_id" readonly="id" options="{'no_create': True}"/>
+                            <field name="judge_id" domain="[('court_id', '=', court_id)]" options="{'no_create': True}"/>
+                        </group>
+                        <group string="Partes">
+                            <field name="client_id"/>
+                            <field name="opposing_party"/>
+                            <field name="lawyer_id"/>
+                            <field name="priority" widget="priority"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="opening_date"/>
+                            <field name="closing_date"/>
+                        </group>
+                        <group>
+                            <field name="parent_case_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="description"/>

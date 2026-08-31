@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_legal_case_user,legal.case.user,model_legal_case,base.group_user,1,1,1,0
+access_legal_case_type_user,legal.case.type.user,model_legal_case_type,base.group_user,1,1,1,0
+access_legal_court_user,legal.court.user,model_legal_court,base.group_user,1,1,1,0
+access_legal_judge_user,legal.judge.user,model_legal_judge,base.group_user,1,1,1,0
+access_legal_case_sentencia_user,legal.case.sentencia.user,model_legal_case_sentencia,base.group_user,1,1,1,0

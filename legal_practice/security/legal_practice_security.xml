@@ -1,0 +1,6 @@
+<odoo>
+    <data>
+        <!-- De momento dejamos acceso abierto a usuarios internos.
+             Cuando definamos roles (abogado / socio / recepción) ampliamos aquí. -->
+    </data>
+</odoo>

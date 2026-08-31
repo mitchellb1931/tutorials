@@ -1,0 +1,50 @@
+<odoo>
+    <record id="view_legal_judge_list" model="ir.ui.view">
+        <field name="name">legal.judge.list</field>
+        <field name="model">legal.judge</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="position"/>
+                <field name="court_id"/>
+                <field name="sentencia_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_legal_judge_form" model="ir.ui.view">
+        <field name="name">legal.judge.form</field>
+        <field name="model">legal.judge</field>
+        <field name="arch" type="xml">
+            <form string="Juez / Magistrado">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <field name="position"/>
+                        <field name="court_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Sentencias Emitidas">
+                            <field name="sentencia_ids" readonly="1">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="case_id"/>
+                                    <field name="sentencia_type"/>
+                                    <field name="sentido"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_legal_judge" model="ir.actions.act_window">
+        <field name="name">Jueces / Magistrados</field>
+        <field name="res_model">legal.judge</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
